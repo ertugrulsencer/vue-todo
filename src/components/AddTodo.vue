@@ -3,6 +3,9 @@
     <form @submit.prevent="addTodo" class="add-todo">
       <input v-model="item.title" type="text" placeholder="Yapılacak" />
       <button type="submit">Ekle</button>
+      <button @click="deleteAll" class="delete-all" type="button">
+        Tümünü Sil
+      </button>
     </form>
   </div>
 </template>
@@ -25,6 +28,9 @@ export default {
       this.item = {
         title: null
       };
+    },
+    deleteAll() {
+      eventBus.$emit("deleteAll", true);
     }
   }
 };
@@ -60,6 +66,17 @@ export default {
     border: 2px solid rgba($primary, 0.35);
     cursor: pointer;
     transition: all 300ms ease-in-out;
+    &.delete-all {
+      background: #c23131;
+      border-color: darken(#c23131, 18);
+      color: $light;
+      flex-basis: 92px;
+      &:hover {
+        color: $light;
+        border-color: darken(#c23131, 18);
+        background: rgba(#c23131, 0.85);
+      }
+    }
     &:hover {
       border: 2px solid $primary;
       color: $primary;

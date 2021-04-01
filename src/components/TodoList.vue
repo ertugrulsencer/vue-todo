@@ -45,6 +45,12 @@ export default {
       this.todoList[id].check = !this.todoList[id].check;
       localStorage.setItem("todo", JSON.stringify(this.todoList));
     });
+    eventBus.$on('deleteAll', confirm => {
+      if(confirm){
+        this.todoList = [];
+        localStorage.setItem("todo", JSON.stringify(this.todoList));
+      }
+    });
   }
 };
 </script>
