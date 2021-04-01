@@ -1,7 +1,7 @@
 <template>
   <div class="todo-list">
     <div class="container-slim">
-      <ul class="list">
+      <ul v-if="todoList.length > 0" class="list">
         <todo-item
           v-for="(item, index) in todoList"
           :class="{ checked: item.check }"
@@ -10,6 +10,9 @@
           >{{ item.title }}</todo-item
         >
       </ul>
+      <div v-else class="alert visible">
+        <strong>Yapılacaklar listeniz şaun için boş :)</strong>
+      </div>
     </div>
   </div>
 </template>
@@ -45,8 +48,8 @@ export default {
       this.todoList[id].check = !this.todoList[id].check;
       localStorage.setItem("todo", JSON.stringify(this.todoList));
     });
-    eventBus.$on('deleteAll', confirm => {
-      if(confirm){
+    eventBus.$on("deleteAll", confirm => {
+      if (confirm) {
         this.todoList = [];
         localStorage.setItem("todo", JSON.stringify(this.todoList));
       }
@@ -54,4 +57,15 @@ export default {
   }
 };
 </script>
-<style lang="scss"></style>
+<style scoped lang="scss">
+@import "../assets/main";
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border: 2px solid darken($primary, 8);
+  background: rgba($primary, 0.5);
+  color: darken($primary, 8);
+}
+</style>
