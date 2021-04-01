@@ -2,6 +2,8 @@
 
 > Yapılacaklar listem :)
 
+![Yapılacklar Listem](example.png)
+
 ## Build Setup
 
 ``` bash
